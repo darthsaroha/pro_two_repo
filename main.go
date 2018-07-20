@@ -190,7 +190,7 @@ func main() {
 		u.genKeys()
 		u.Created_at = time.Now().String()
 		res.Header().Set("Content-Type", "application/json")
-		res.Write([]byte("{\"form\" : " + u.Form + ",\"created_at\": \"" + u.Created_at + "\",\"name\" : \"" + u.Name + "\",\"email\" : \"" + u.Email + "\",\"auth\" : [\"" + u.Auth[0] + "\",\"" + u.Auth[1] + "\",\"" + u.Auth[2] + "\"]}"))
+		res.Write([]byte("{\"form\" : 3,\"created_at\": \"" + u.Created_at + "\",\"name\" : \"" + u.Name + "\",\"email\" : \"" + u.Email + "\",\"auth\" : [\"" + u.Auth[0] + "\",\"" + u.Auth[1] + "\",\"" + u.Auth[2] + "\"]}"))
 	})
 
 	// all users
