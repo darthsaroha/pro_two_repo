@@ -63,6 +63,13 @@ type user struct {
 	Auth            [3]string `json:"auth"`
 	Created_at      string    `json:"created_at"`
 	Form            string    `json:"form"`
+	Conf            string    `json:"conf"`
+}
+
+//active user
+type actuser struct {
+	Email string `json:"email"`
+	Time  string `json:"time"`
 }
 
 // genrate keys
@@ -73,6 +80,16 @@ func (u *user) genKeys() {
 	u.Auth[2] = u.Password_digest
 }
 
+func updateActiveUser(active_users *[]actuser, email string) {
+	for i, num := range *active_users {
+		if num.Email == email {
+			(*active_users)[i].Time = time.Now().String()[0:19]
+			return
+		}
+	}
+	*active_users = append(*active_users, actuser{Email: email, Time: time.Now().String()[0:19]})
+}
+
 // authorize user access
 func (u *user) authAccess(req *http.Request) bool {
 	cookie, err := req.Cookie("Auth2")
@@ -80,6 +97,9 @@ func (u *user) authAccess(req *http.Request) bool {
 		return false
 	}
 	u.Auth[2] = cookie.Value
+	if len(u.Auth[2]) < 32 {
+		return false
+	}
 	cookie, err = req.Cookie("Auth0")
 	if err != nil {
 		return false
@@ -120,15 +140,16 @@ func (e event) fetchEvents(db *sql.DB, cond string, events chan string) {
 //fetch users
 func (u user) fetchUsers(db *sql.DB, users chan string) {
 	var usrs string = "["
-	rows, err := db.Query("SELECT uname , uemail, uform  FROM pr_two_users;")
+	var titles [4]string
+	rows, err := db.Query("SELECT uname , uemail, uform,uclt,ucht,ulgt,utmt  FROM pr_two_users;")
 	if err != nil {
 		users <- "[]"
 		return
 	}
 	defer rows.Close()
 	for rows.Next() {
-		rows.Scan(&u.Name, &u.Email, &u.Form)
-		usrs += "{\"name\": \"" + u.Name + "\",\"email\": \"" + u.Email + "\",\"form\": " + u.Form + "},"
+		rows.Scan(&u.Name, &u.Email, &u.Form, &titles[0], &titles[1], &titles[2], &titles[3])
+		usrs += "{\"titles\": [" + titles[0] + "," + titles[1] + "," + titles[2] + "," + titles[3] + "],\"name\": \"" + u.Name + "\",\"email\": \"" + u.Email + "\",\"form\": " + u.Form + "},"
 	}
 	usrs = usrs[0:(len(usrs)-1)] + "]"
 	if len(usrs) < 4 {
@@ -150,6 +171,7 @@ func main() {
 	if db.Ping() != nil {
 		log.Fatal("Cannot Connect..")
 	}
+	active_users := make([]actuser, 0, 20)
 	mux := http.NewServeMux()
 	mux.Handle("/", http.FileServer(http.Dir("static")))
 
@@ -161,13 +183,14 @@ func main() {
 			http.Error(res, "INVREQ", 500)
 			return
 		}
-		if err := db.QueryRow("SELECT uid ,uform, uname , uemail , ucreated_at FROM pr_two_users WHERE uemail = ? AND upassword_digest = ?;", u.Email, encode(u.Password_digest)).Scan(&u.Auth[0], &u.Form, &u.Name, &u.Email, &u.Created_at); err != nil {
+		if err := db.QueryRow("SELECT uid ,uform, uname , uemail ,uconf, ucreated_at FROM pr_two_users WHERE uemail = ? AND upassword_digest = ?;", u.Email, encode(u.Password_digest)).Scan(&u.Auth[0], &u.Form, &u.Name, &u.Email, &u.Conf, &u.Created_at); err != nil {
 			http.Error(res, "NOREQ", 500)
 			return
 		}
 		u.genKeys()
+		updateActiveUser(&active_users, u.Email)
 		res.Header().Set("Content-Type", "application/json")
-		res.Write([]byte("{\"form\" : " + u.Form + ",\"created_at\": \"" + u.Created_at + "\",\"name\" : \"" + u.Name + "\",\"email\" : \"" + u.Email + "\",\"auth\" : [\"" + u.Auth[0] + "\",\"" + u.Auth[1] + "\",\"" + u.Auth[2] + "\"]}"))
+		res.Write([]byte("{\"conf\": " + u.Conf + ",\"form\" : " + u.Form + ",\"created_at\": \"" + u.Created_at + "\",\"name\" : \"" + u.Name + "\",\"email\" : \"" + u.Email + "\",\"auth\" : [\"" + u.Auth[0] + "\",\"" + u.Auth[1] + "\",\"" + u.Auth[2] + "\"]}"))
 	})
 
 	// user join
@@ -181,16 +204,17 @@ func main() {
 			return
 		}
 		u.Auth[0] = u.Auth[0][2:4] + u.Auth[0][5:7] + u.Auth[0][8:10] + u.Auth[0][17:19] + u.Auth[0][20:22]
-		stm, _ := db.Prepare("INSERT INTO pr_two_users (uid,uemail , uname , upassword_digest , ucreated_at , uupdated_at) VALUES (? ,?, ?, ?,?,?);")
+		stm, _ := db.Prepare("INSERT INTO pr_two_users (uid,uemail , uname ,uconf, upassword_digest , ucreated_at , uupdated_at) VALUES (? ,?, ?, ?,?,?);")
 		defer stm.Close()
-		if _, err := stm.Exec(u.Auth[0], u.Email, u.Name, encode(u.Password_digest), time.Now(), time.Now()); err != nil {
+		if _, err := stm.Exec(u.Auth[0], u.Email, u.Name, u.Conf, encode(u.Password_digest), time.Now(), time.Now()); err != nil {
 			http.Error(res, "NOINS", 500)
 			return
 		}
 		u.genKeys()
+		updateActiveUser(&active_users, u.Email)
 		u.Created_at = time.Now().String()
 		res.Header().Set("Content-Type", "application/json")
-		res.Write([]byte("{\"form\" : 3,\"created_at\": \"" + u.Created_at + "\",\"name\" : \"" + u.Name + "\",\"email\" : \"" + u.Email + "\",\"auth\" : [\"" + u.Auth[0] + "\",\"" + u.Auth[1] + "\",\"" + u.Auth[2] + "\"]}"))
+		res.Write([]byte("{\"conf\": " + u.Conf + ",\"form\" : 3,\"created_at\": \"" + u.Created_at + "\",\"name\" : \"" + u.Name + "\",\"email\" : \"" + u.Email + "\",\"auth\" : [\"" + u.Auth[0] + "\",\"" + u.Auth[1] + "\",\"" + u.Auth[2] + "\"]}"))
 	})
 
 	// all users
@@ -200,6 +224,25 @@ func main() {
 		go u.fetchUsers(db, users)
 		res.Header().Set("Content-Type", "application/json")
 		res.Write([]byte(<-users))
+	})
+
+	//change user conf
+	mux.HandleFunc("/update/user", func(res http.ResponseWriter, req *http.Request) {
+		var u user
+		if u.authAccess(req) == false {
+			http.Error(res, "NOACS", 500)
+			return
+		}
+		defer req.Body.Close()
+		if json.NewDecoder(req.Body).Decode(&u) != nil {
+			http.Error(res, "INVREQ", 500)
+			return
+		}
+		stm, _ := db.Prepare("UPDATE pr_two_users SET uconf = ?  WHERE uid = ?")
+		defer stm.Close()
+		_, _ = stm.Exec(u.Conf, u.Auth[0])
+		res.Header().Set("Content-Type", "application/json")
+		res.Write([]byte("{\"updated\":true}"))
 	})
 
 	//create event
@@ -215,6 +258,7 @@ func main() {
 			http.Error(res, "NOACS", 500)
 			return
 		}
+		updateActiveUser(&active_users, u.Auth[1])
 		e.Created_at = time.Now().String()
 		e.Id = e.Created_at[2:4] + e.Created_at[5:7] + e.Created_at[8:10] + e.Created_at[17:19] + e.Created_at[20:22]
 		stm, _ := db.Prepare("INSERT INTO pr_two_events (eid,emanagers,etype ,eresult,efixtures,epublic,ecreated_at , eupdated_at) VALUES (?,?,?,? ,? ,?, ?,?);")
@@ -246,15 +290,17 @@ func main() {
 		var e event
 		users := make(chan string)
 		events := make(chan string)
-		go u.fetchUsers(db, users)
 		if u.authAccess(req) == false {
 			cond = "WHERE epublic = 1;"
 		} else {
+			updateActiveUser(&active_users, u.Auth[1])
 			cond = "WHERE epublic = 1 OR emanagers LIKE '%" + u.Auth[1] + "%';"
 		}
+		go u.fetchUsers(db, users)
 		go e.fetchEvents(db, cond, events)
 		res.Header().Set("Content-Type", "application/json")
-		res.Write([]byte("{\"users\": " + <-users + ",\"events\": " + <-events + "}"))
+		active, _ := json.Marshal(active_users)
+		res.Write([]byte("{\"users\": " + <-users + ",\"events\": " + <-events + ",\"active\": " + string(active) + "}"))
 	})
 
 	// all events
@@ -287,6 +333,7 @@ func main() {
 			http.Error(res, "NOACS", 500)
 			return
 		}
+		updateActiveUser(&active_users, u.Auth[1])
 		e.Id = req.FormValue("eid")
 		if err := db.QueryRow("SELECT efixtures,emanagers FROM pr_two_events WHERE eid = ?", e.Id).Scan(&e.Fixtures, &e.Managers); err != nil {
 			http.Error(res, "NOREQ", 500)

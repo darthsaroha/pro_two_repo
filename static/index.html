@@ -110,7 +110,7 @@
         color: var(--fontcolor);
         text-align: left;
         background-color: var(--background);
-        background-image: url("/assets/images/back.jpg");
+        background-image: url("/assets/images/backimg.jpg");
         background-repeat: no-repeat;
         background-attachment: fixed;
     }
@@ -231,7 +231,7 @@
 
     a:not([href]):not([tabindex]):hover,
     a:not([href]):not([tabindex]):focus {
-        color: #7376df;
+        color: var(--primary);
         text-decoration: none;
         cursor: pointer;
     }
@@ -2652,7 +2652,6 @@
     .btn:focus,
     .btn.focus {
         outline: 0;
-        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
     }
 
     .btn.disabled,
@@ -2676,14 +2675,14 @@
 
     .btn-primary {
         color: #fff;
-        background-color: #7376df;
-        border-color: #7376df;
+        background-color: var(--primary);
+        border-color: var(--primary);
     }
 
     .btn-primary:hover {
         color: #fff;
-        background-color: #7376df;
-        border-color: #7376df;
+        background-color: var(--primary);
+        border-color: var(--primary);
     }
 
     .btn-primary:focus,
@@ -2702,8 +2701,8 @@
     .btn-primary:not(:disabled):not(.disabled).active,
     .show>.btn-primary.dropdown-toggle {
         color: #fff;
-        background-color: #7376df;
-        border-color: #7376df;
+        background-color: var(--primary);
+        border-color: var(--primary);
     }
 
     .btn-primary:not(:disabled):not(.disabled):active:focus,
@@ -2716,6 +2715,7 @@
         color: #fff;
         background-color: #6c757d;
         border-color: #6c757d;
+        border-radius: 0;
     }
 
     .btn-secondary:hover {
@@ -2725,15 +2725,12 @@
     }
 
     .btn-secondary:focus,
-    .btn-secondary.focus {
-        box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
-    }
+    .btn-secondary.focus {}
 
     .btn-secondary.disabled,
     .btn-secondary:disabled {
         color: #fff;
         background-color: #6c757d;
-        border-color: #6c757d;
     }
 
     .btn-secondary:not(:disabled):not(.disabled):active,
@@ -2741,14 +2738,11 @@
     .show>.btn-secondary.dropdown-toggle {
         color: #fff;
         background-color: #545b62;
-        border-color: #4e555b;
     }
 
     .btn-secondary:not(:disabled):not(.disabled):active:focus,
     .btn-secondary:not(:disabled):not(.disabled).active:focus,
-    .show>.btn-secondary.dropdown-toggle:focus {
-        box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
-    }
+    .show>.btn-secondary.dropdown-toggle:focus {}
 
     .btn-success {
         color: #fff;
@@ -5383,7 +5377,7 @@
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
-        height: 1rem;
+        height: 4px;
         overflow: hidden;
         font-size: 0.75rem;
         background-color: var(--progbg);
@@ -5403,7 +5397,7 @@
         justify-content: center;
         color: #fff;
         text-align: center;
-        background-color: #7376df;
+        background-color: var(--primary);
         transition: width 0.6s ease;
     }
 
@@ -5446,75 +5440,57 @@
 
     .list-group-item-action {
         width: 100%;
-        color: #495057;
-        text-align: inherit;
+        color: #fff;
+        text-align: left;
     }
 
     .list-group-item-action:hover,
     .list-group-item-action:focus {
-        color: #495057;
+        color: #fff;
         text-decoration: none;
-        background-color: #f7f7f7;
+        background-color: none;
     }
-
 
     .list-group-item-action:active {
         color: #fff;
-        background-color: #7376df;
-    }
-
-    .list-group-item-action:active>i {
-        color: #fff;
+        background-color: none;
     }
 
     .list-group-item {
         position: relative;
         display: block;
         padding: 0.75rem 1.25rem;
-        margin-bottom: -1px;
-        background-color: #fff;
+        margin-bottom: 3px;
+        background-color: #303030;
     }
 
     .list-group-item:first-child {
-        /*  border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.25rem;*/
+        /*border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;*/
     }
 
     .list-group-item:last-child {
         margin-bottom: 0;
-        /*  border-bottom-right-radius: 0.25rem;
-  border-bottom-left-radius: 0.25rem;*/
+        /* border-bottom-right-radius: 0.25rem;
+        border-bottom-left-radius: 0.25rem;*/
     }
 
     .list-group-item:hover,
     .list-group-item:focus {
         z-index: 1;
         text-decoration: none;
-        outline: 0;
     }
 
     .list-group-item.disabled,
     .list-group-item:disabled {
-        color: #6c757d;
-        background-color: #fff;
+        color: #999;
+        background-color: none;
     }
 
     .list-group-item.active {
         z-index: 2;
         color: #fff;
-        background-color: #7376df;
-        border-color: #7376df;
-        outline: 0;
     }
-
-    .list-group-item.active>i {
-        color: #fff;
-    }
-
-    .list-group-item>i {
-        color: #7376df;
-    }
-
 
     .list-group-flush .list-group-item {
         border-right: 0;
@@ -5531,139 +5507,139 @@
     }
 
     .list-group-item-primary {
-        color: #004085;
-        background-color: #b8daff;
+        color: #1d2f42;
+        background-color: #c7d1db;
     }
 
     .list-group-item-primary.list-group-item-action:hover,
     .list-group-item-primary.list-group-item-action:focus {
-        color: #004085;
-        background-color: #9fcdff;
+        color: #1d2f42;
+        background-color: #b7c4d1;
     }
 
     .list-group-item-primary.list-group-item-action.active {
         color: #fff;
-        background-color: #004085;
-        border-color: #004085;
+        background-color: #1d2f42;
+        border-color: #1d2f42;
     }
 
     .list-group-item-secondary {
-        color: #383d41;
-        background-color: #d6d8db;
+        color: #232323;
+        background-color: #cbcbcb;
     }
 
     .list-group-item-secondary.list-group-item-action:hover,
     .list-group-item-secondary.list-group-item-action:focus {
-        color: #383d41;
-        background-color: #c8cbcf;
+        color: #232323;
+        background-color: #bebebe;
     }
 
     .list-group-item-secondary.list-group-item-action.active {
         color: #fff;
-        background-color: #383d41;
-        border-color: #383d41;
+        background-color: #232323;
+        border-color: #232323;
     }
 
     .list-group-item-success {
-        color: #155724;
-        background-color: #c3e6cb;
+        color: #006249;
+        background-color: #b8ecdf;
     }
 
     .list-group-item-success.list-group-item-action:hover,
     .list-group-item-success.list-group-item-action:focus {
-        color: #155724;
-        background-color: #b1dfbb;
+        color: #006249;
+        background-color: #a4e7d6;
     }
 
     .list-group-item-success.list-group-item-action.active {
         color: #fff;
-        background-color: #155724;
-        border-color: #155724;
+        background-color: #006249;
+        border-color: #006249;
     }
 
     .list-group-item-info {
-        color: #0c5460;
-        background-color: #bee5eb;
+        color: #1b4f72;
+        background-color: #c6e2f5;
     }
 
     .list-group-item-info.list-group-item-action:hover,
     .list-group-item-info.list-group-item-action:focus {
-        color: #0c5460;
-        background-color: #abdde5;
+        color: #1b4f72;
+        background-color: #b0d7f1;
     }
 
     .list-group-item-info.list-group-item-action.active {
         color: #fff;
-        background-color: #0c5460;
-        border-color: #0c5460;
+        background-color: #1b4f72;
+        border-color: #1b4f72;
     }
 
     .list-group-item-warning {
-        color: #856404;
-        background-color: #ffeeba;
+        color: #7e5109;
+        background-color: #fce3bd;
     }
 
     .list-group-item-warning.list-group-item-action:hover,
     .list-group-item-warning.list-group-item-action:focus {
-        color: #856404;
-        background-color: #ffe8a1;
+        color: #7e5109;
+        background-color: #fbd9a5;
     }
 
     .list-group-item-warning.list-group-item-action.active {
         color: #fff;
-        background-color: #856404;
-        border-color: #856404;
+        background-color: #7e5109;
+        border-color: #7e5109;
     }
 
     .list-group-item-danger {
-        color: #721c24;
-        background-color: #f5c6cb;
+        color: #78281f;
+        background-color: #f8cdc8;
     }
 
     .list-group-item-danger.list-group-item-action:hover,
     .list-group-item-danger.list-group-item-action:focus {
-        color: #721c24;
-        background-color: #f1b0b7;
+        color: #78281f;
+        background-color: #f5b8b1;
     }
 
     .list-group-item-danger.list-group-item-action.active {
         color: #fff;
-        background-color: #721c24;
-        border-color: #721c24;
+        background-color: #78281f;
+        border-color: #78281f;
     }
 
     .list-group-item-light {
-        color: #818182;
-        background-color: #fdfdfe;
+        color: #191919;
+        background-color: #c5c5c5;
     }
 
     .list-group-item-light.list-group-item-action:hover,
     .list-group-item-light.list-group-item-action:focus {
-        color: #818182;
-        background-color: #ececf6;
+        color: #191919;
+        background-color: #b8b8b8;
     }
 
     .list-group-item-light.list-group-item-action.active {
         color: #fff;
-        background-color: #818182;
-        border-color: #818182;
+        background-color: #191919;
+        border-color: #191919;
     }
 
     .list-group-item-dark {
-        color: #1b1e21;
-        background-color: #c6c8ca;
+        color: #191919;
+        background-color: #c5c5c5;
     }
 
     .list-group-item-dark.list-group-item-action:hover,
     .list-group-item-dark.list-group-item-action:focus {
-        color: #1b1e21;
-        background-color: #b9bbbe;
+        color: #191919;
+        background-color: #b8b8b8;
     }
 
     .list-group-item-dark.list-group-item-action.active {
         color: #fff;
-        background-color: #1b1e21;
-        border-color: #1b1e21;
+        background-color: #191919;
+        border-color: #191919;
     }
 
     .close {
@@ -5759,7 +5735,8 @@
         background-color: var(--cardbg);
         background-clip: padding-box;
         border-radius: 0.3rem;
-        outline: 0;    }
+        outline: 0;
+    }
 
     .modal-backdrop {
         position: fixed;
@@ -6412,7 +6389,7 @@
     }
 
     .bg-primary {
-        background-color: #007bff !important;
+        background-color: var(--primary) !important;
     }
 
     a.bg-primary:hover,
@@ -14144,9 +14121,7 @@
     </nav>
     <div class="container">
         <div class="row" id="pageViewID">
-            <div class="col-xs-12 col-md-4 col-lg-4">
-            </div>
-            <div class="col-xs-12 col-md-8 col-lg-8">
+            <div class="col-xs-12 col-md-12 col-lg-12">
             </div>
         </div>
     </div>
@@ -14212,15 +14187,7 @@
                 </div>
                 <div class="modal-body">
                     <form name="addEventForm">
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">Select Event Type</label>
-                            <select class="form-control" name="etype">
-                                <option value="0">Champions League</option>
-                                <option value="1">League</option>
-                                <option value="2">Tournament</option>
-                                <option value="3">Challenge Series</option>
-                            </select>
-                        </div>
+                        <input type="hidden" name="etype" value="0">
                         <div class="form-group card">
                             <div class="card-body">
                                 <span class="mb-3"></span>
@@ -14234,14 +14201,33 @@
                                 <a onclick="addManagerTeam()">Add Team</a>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="custom-control custom-toggle my-2">
-                                <input type="checkbox" id="customToggle2" name="public" class="custom-control-input" value="1" checked="true">
-                                <label class="custom-control-label" for="customToggle2">Public?</label>
-                            </div>
+                        <div class="form-check">
+                            <input type="checkbox" id="customToggle2" name="public" class="form-check-input" value="1" checked="true">
+                            <label>Public?</label>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary" name="submit"><i class="fas fa-plus"></i> <b> Add</b></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="changeConfModalID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="height: 180px !important;">
+                <div class="modal-header">
+                    <button type="button" style="outline: 0;" class="close" onclick="closeModal('changeConfModalID')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form name="userConfForm">
+                        <label>Change Your Favourite Club</label>
+                        <input type="hidden" name="etype" value="0">
+                        <div class="form-group">
+                            <select class="form-control" name="uteam">
+                            </select>
                         </div>
                     </form>
                 </div>
@@ -14301,8 +14287,8 @@
             this.Pages = [{ url: "", temp: "home", init: InitHomePage },
                 { url: "event", temp: "event", init: InitEventPage }
             ];
-            this.AvailTeams = [{ name: "Arsenal FC" }, { name: "Chelsea" }, { name: "Manchester City" }, { name: "Manchester United" }];
-            this.AvailEvents = [{ name: "Champions League", icon: "fas fa-trophy", view: "ChampionsLeague", matches: [0, 1, 3, 4, 5] }, { name: "League", icon: "fas fa-shield-alt", view: "League", matches: [2] }, { name: "Tournament", icon: "fas fa-medal", view: "Tournament", matches: [0, 1, 3, 4, 5] }, { name: "Challenge Series", icon: "fas fa-ribbon", view: "ChallengeSeries", matches: [6] }];
+            this.AvailTeams = [{ name: "Arsenal FC", col: "#E84A5F" }, { name: "Chelsea", col: "#007bff" }, { name: "Manchester City", col: "#2F9599" }, { name: "Manchester United", col: "#CC527A" }];
+            this.AvailEvents = [{ name: "Champions League", icon: "fas fa-trophy", view: "ChampionsLeague", link: "championsleague", matches: [0, 1, 3, 4, 5] }, { name: "League", icon: "fas fa-shield-alt", view: "League", matches: [2], link: "league" }, { name: "Tournament", icon: "fas fa-medal", view: "Tournament", matches: [0, 1, 3, 4, 5], link: "tournament" }, { name: "Challenge Series", icon: "fas fa-ribbon", view: "ChallengeSeries", matches: [6], link: "challenge" }];
             this.EventStatus = ["fas fa-dot-circle text-primary", "fas fa-check-circle text-success", "fas fa-times-circle text-danger"];
             this.CurrentPage = 0;
             this.MatchTypes = [{ n: "Group A", p: 3 }, { n: "Group B", p: 3 }, { n: "League", p: 3 }, { n: "Semi-Final", p: 18 }, { n: "Quarter-Final", p: 9 }, { n: "Final", p: 30 }, { n: "Challenge", p: 3 }];
@@ -14360,7 +14346,7 @@
         //init home page
         function InitHomePage() {
             let FetchAllDataPromise = new Promise(function(resolve, reject) {
-                if (localStorage.getItem("prTwoAllData") != null) {
+                if (ld.All.events.length != 0) {
                     resolve(true);
                 } else {
                     reject(false);
@@ -14369,17 +14355,14 @@
             FetchAllDataPromise.catch(function(err) {
                 return GetAll();
             }).then(function(res) {
-                data = JSON.parse(localStorage.getItem("prTwoAllData"));
-                ld.All = data;
-                RenderUsers();
-                RenderEvents();
+                RenderMenu();
             });
         }
 
         // init event page 
         function InitEventPage() {
             let FetchAllDataPromise = new Promise(function(resolve, reject) {
-                if (localStorage.getItem("prTwoAllData") != null) {
+                if (ld.All.events.length != 0) {
                     resolve(true);
                 } else {
                     reject(false);
@@ -14388,10 +14371,7 @@
             FetchAllDataPromise.catch(function(err) {
                 return GetAll();
             }).then(function(res) {
-                data = JSON.parse(localStorage.getItem("prTwoAllData"));
-                ld.All = data;
                 ld.SelectedEvent = FindEventById(ld.Params[2]);
-                RenderUsers();
                 RenderEvent();
             });
         }
@@ -14403,12 +14383,11 @@
                 document.cookie = `Auth0=${ld.User.auth[0]}`;
                 document.cookie = `Auth1=${ld.User.auth[1]}`;
                 document.cookie = `Auth2=${ld.User.auth[2]}`;
-                RenderUsers();
                 document.documentElement.style.setProperty('--control', 'inline-block');
+                document.documentElement.style.setProperty('--primary', ld.AvailTeams[ld.User.conf.fc].col);
                 return;
             }
         }
-
         IsLogged();
 
         // user login
@@ -14418,13 +14397,7 @@
             fetch("/auth/user", { method: 'post', headers: { "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" }, body: `{ "email" : "${e.target.email.value}", "digest" : "${e.target.digest.value}"}` }).then(data => data.json())
                 .then(data => {
                     localStorage.setItem("prTwoUserData", JSON.stringify(data));
-                    IsLogged();
-                    CloseModal('loginJoinModalID');
-                    GetAll().then(function(res) {
-                        data = JSON.parse(localStorage.getItem("prTwoAllData"));
-                        ld.All = data;
-                        if (ld.Params[1] == "") { RenderEvents(); }
-                    });
+                    location.reload();
                 })
                 .catch(function(error) {})
                 .then(function(res) { Loading(false); });
@@ -14437,28 +14410,160 @@
             fetch("/join/user", { method: 'post', headers: { "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" }, body: `{ "email" : "${e.target.email.value}","name": "${e.target.name.value}" ,"digest" : "${e.target.digest.value}"}` }).then(data => data.json())
                 .then(data => {
                     localStorage.setItem("prTwoUserData", JSON.stringify(data));
-                    IsLogged();
-                    CloseModal('loginJoinModalID');
-                    GetAll().then(function(res) {
-                        data = JSON.parse(localStorage.getItem("prTwoAllData"));
-                        ld.All = data;
-                        if (ld.Params[1] == "") { RenderEvents(); }
-                    });
+                    location.reload();
                 })
                 .catch(function(error) {})
                 .then(function(res) { Loading(false); });
         }
 
-        // get users
-        function GetUsers() {
-            Loading(true);
-            return fetch("/fetch/users", { method: 'get', headers: { "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" } }).then(data => data.json())
-                .then(data => {
-                    ld.All.users = data;
-                    ld.PreventState.usersApi = true;
-                })
-                .catch(function(error) {})
-                .then(function(res) { Loading(false); });
+        //render menu
+        function RenderMenu() {
+            let page = document.getElementById('pageViewID');
+            let menu = document.createElement('div');
+            menu.className = 'col-xs-12 col-md-12 col-lg-12';
+            let usercard = `<div class="card-body">
+     <button class="btn btn-primary btn-block" onclick="showModal('loginJoinModalID')">MANAGER LOGIN</button>
+     </div>`;
+            if (ld.User.email != undefined) {
+                let ind = FindUserByEmail(ld.User.email)[1];
+                let form = (ld.All.users[ind].form / 30) * 100;
+                usercard = `<i class="far fa-user fa-4x text-primary mb-3 pt-3"></i>
+        <h4>${ld.User.name}</h4><font class="text-muted mb-2">${ld.User.email}</font><br><div class="progress"><div class="progress-bar" role="progressbar" style="width: ${form}%" aria-valuenow="${form}" aria-valuemin="0" aria-valuemax="100"></div></div>
+        <div class="list-group"><div onclick="prepUserConf()" style="cursor: pointer;" class="list-group-item list-group-item-action  text-center">My Club<br><font class="text-muted" id="favClubID">${ld.AvailTeams[ld.User.conf.fc].name}</font></div> </div><div class="card-footer text-center">
+            <i class="fas fa-power-off text-primary"  style="cursor: pointer;" onclick="logOut()"></i>
+        </div>`;
+            }
+            menu.innerHTML = `<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+    <div class="card mb-3 text-center" id="userCardID">
+    ${usercard}
+    </div>
+    <div class="card mb-3 text-center" id="event2CardID">
+        <i class="fas fa-medal fa-4x text-primary mb-3 pt-3"></i>
+        <h4>Tournaments</h4>
+        <div class="list-group"></div>
+        <div class="card-footer text-center">
+            <i class="fas fa-angle-down fa-2x text-primary" onclick="showEvents(this,2)" style="cursor: pointer;"></i>
+        </div>
+    </div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+    <div class="card mb-3 text-center" id="event0CardID">
+        <i class="fas fa-trophy fa-4x text-primary mb-3 pt-3"></i>
+        <h4>Champions Leagues</h4>
+        <div class="list-group"></div>
+        <div class="card-footer text-center">
+            <i class="fas fa-angle-down fa-2x text-primary" onclick="showEvents(this,0)" style="cursor: pointer;"></i>
+        </div>
+    </div>
+        <div class="card mb-3 text-center" id="event1CardID">
+        <i class="fas fa-shield-alt fa-4x text-primary mb-3 pt-3"></i>
+        <h4>Leagues</h4>
+        <div class="list-group"></div>
+        <div class="card-footer text-center">
+            <i class="fas fa-angle-down fa-2x text-primary" onclick="showEvents(this,1)" style="cursor: pointer;"></i>
+        </div>
+    </div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+    <div class="card mb-3 text-center" id="event3CardID">
+        <i class="fas fa-ribbon fa-4x text-primary mb-3 pt-3"></i>
+        <h4>Challenge Series</h4>
+        <div class="list-group"></div>
+        <div class="card-footer text-center">
+            <i class="fas fa-angle-down fa-2x text-primary" onclick="showEvents(this,3)" style="cursor: pointer;"></i>
+        </div>
+    </div>
+        <div class="card mb-3 text-center" id="managersCardID">
+        <i class="fas fa-users fa-4x text-primary mb-3 pt-3"></i>
+        <h4>Managers</h4>
+        <div class="list-group"></div>
+        <div class="card-footer text-center">
+            <i class="fas fa-angle-down fa-2x text-primary" onclick="showManagers(event)" style="cursor: pointer;"></i>
+        </div>
+    </div>
+</div>
+</div>`;
+            page.replaceChild(menu, page.children[0]);
+        }
+
+        // log out
+        function LogOut() {
+            localStorage.clear();
+            document.cookie = `Auth0=0`;
+            document.cookie = `Auth1=1`;
+            document.cookie = `Auth2=2`;
+            location.reload();
+        }
+
+        // show managers
+        function ShowManagers(e) {
+            let cont = document.createElement('div');
+            let card = document.getElementById('managersCardID');
+            let html = '';
+            cont.className = 'list-group';
+            if (e.target.classList.contains('fa-angle-down')) {
+                for (let i = 0; i < ld.All.users.length; i++) {
+                    if (ld.All.users[i].email == ld.User.email) { continue; }
+                    let form = (ld.All.users[i].form / 30) * 100;
+                    html = html + `<a href="#" class="list-group-item list-group-item-action"><div class="media"><i class="mr-3 far fa-user fa-3x text-primary"></i><div class="media-body">${ld.All.users[i].name}<br>
+                   <font class="text-muted">${ld.All.users[i].email}</font><div class="progress"><div class="progress-bar" role="progressbar" style="width: ${form}%" aria-valuenow="${form}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>${FindActiveUser(ld.All.users[i].email)}</div></div></a>`;
+                }
+                cont.innerHTML = html;
+                e.target.className = `fas fa-angle-up fa-2x text-primary`;
+            } else {
+                e.target.className = `fas fa-angle-down fa-2x text-primary`;
+                cont.innerHTML = '';
+            }
+            card.replaceChild(cont, card.children[2]);
+        }
+
+        // show events
+        function ShowEvents(el, type) {
+            let cont = document.createElement('div');
+            let card = document.getElementById(`event${type}CardID`);
+            let button = `<button type="button" onclick="prepAddEventForm(${type})" class="btn btn-secondary btn-block  admin-control">ADD NEW</button>`;
+            cont.innerHTML = button;
+            let group = document.createElement('div');
+            group.className = 'list-group';
+            if (el.classList.contains('fa-angle-down')) {
+                for (let i = ld.All.events.length - 1; i >= 0; i--) {
+                    if (ld.All.events[i].type != type) { continue; }
+                    group.appendChild(EventList(ld.All.events[i]));
+                }
+                if (group.children.length == 0) { group.innerHTML = `<div id="noEvent${type}ID" class="list-group-item list-group-item-action text-center">No Event<br><font class="text-muted">No ${ld.AvailEvents[type].name} Found</font></div>`; }
+                cont.appendChild(group);
+                el.className = `fas fa-angle-up fa-2x text-primary`;
+            } else {
+                el.className = `fas fa-angle-down fa-2x text-primary`;
+                cont.innerHTML = '';
+            }
+            card.replaceChild(cont, card.children[2]);
+        }
+
+        // event list
+        function EventList(event) {
+            let date = new Date(event.created_at);
+            let el = document.createElement('a');
+            el.className = 'list-group-item list-group-item-action';
+            el.href = `/#/event/${event.id}`;
+            el.innerHTML = `
+                    ${ld.AvailEvents[event.type].name}<br>
+                    <i class="far fa-calendar-alt text-primary"></i><font class="text-muted"> ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}<br>${event.result}</font>`;
+            return el;
+        }
+
+        // prep user conf
+        function PrepUserConf() {
+            let form = document.querySelector(`form[name="userConfForm"]`);
+            let teams = `<option value="${ld.User.conf.fc}">${ld.AvailTeams[ld.User.conf.fc].name}</option>`;
+            for (let i = 0; i < ld.AvailTeams.length; i++) {
+                if (ld.User.conf.fc == i) { continue; }
+                teams = teams + `<option value="${i}">${ld.AvailTeams[i].name}</option>`;
+            }
+            form.uteam.innerHTML = teams;
+            ShowModal('changeConfModalID');
         }
 
         //get all
@@ -14466,54 +14571,27 @@
             Loading(true);
             return fetch("/fetch/all", { method: 'get', credentials: 'include', headers: { "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" } }).then(data => data.json())
                 .then(data => {
-                    localStorage.setItem("prTwoAllData", JSON.stringify(data));
                     ld.All = data;
                 })
                 .catch(function(error) {})
                 .then(function(res) { Loading(false); });
         }
 
-        // user card
-        function UserCard() {
-            let user = document.createElement('div');
-            user.className = 'card mb-4';
-            if (ld.User.email == undefined) {
-                user.innerHTML = `<div class="card-body text-center"><button class="btn btn-primary btn-block" onclick="showModal('loginJoinModalID')">Manager Login</button></div>`;
-                return user;
-            }
-            let form = (ld.User.form / 30) * 100;
-            user.innerHTML = `<div class="card-body"><div class="media"><i class="mr-3 far fa-user fa-3x text-primary"></i><div class="media-body">${ld.User.name}<br>
-                   <font class="text-muted">${ld.User.email}</font><div class="progress"><div class="progress-bar" role="progressbar" style="width: ${form}%" aria-valuenow="${form}" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div></div></div></div>`;
-            return user;
-        }
-
-        // managers card
-        function ManagersCard() {
-            let managers = document.createElement('div');
-            managers.className = 'card mb-4';
-            let html = `<div class="card-body" id="allUsersID"><h4 class="card-title"><i class="far fa-user text-primary"></i> Managers</h4><h6 class="card-subtitle mb-2 text-muted">Current Form</h6><br>`;
-            for (let i = 0; i < ld.All.users.length; i++) {
-                if (ld.User.email != undefined && ld.User.email == ld.All.users[i].email) {
-                    continue;
+        // find active
+        function FindActiveUser(email) {
+            if (ld.All.active == null || ld.User.email == undefined) { return ''; }
+            for (let i = 0; i < ld.All.active.length; i++) {
+                if (ld.All.active[i].email == email) {
+                    let date = new Date(ld.All.active[i].time);
+                    let cur = new Date();
+                    if (cur.getDate() == date.getDate()) {
+                        return `<small>Last Seen Today At ${date.getHours()}:${date.getMinutes()}</small>`;
+                    } else {
+                        return `<small>Last Seen ${date.getDate()}/${date.getMonth()}/${date.getFullYear()} At ${date.getHours()}:${date.getMinutes()}</small>`;
+                    }
                 }
-                let form = (ld.All.users[i].form / 30) * 100;
-                html = html + `<div class="media"><i class="mr-3 far fa-user fa-3x text-primary"></i><div class="media-body">${ld.All.users[i].name}<br>
-                   <font class="text-muted">${ld.All.users[i].email}</font><div class="progress"><div class="progress-bar" role="progressbar" style="width: ${form}%" aria-valuenow="${form}" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div></div></div><br>`;
             }
-            managers.innerHTML = html;
-            return managers;
-        }
-
-        // render users
-        function RenderUsers() {
-            let page = document.getElementById('pageViewID');
-            let cont = document.createElement('div');
-            cont.className = 'col-xs-12 col-md-4 col-lg-4';
-            cont.appendChild(UserCard());
-            cont.appendChild(ManagersCard());
-            page.replaceChild(cont, page.children[0]);
+            return '';
         }
 
         // add event
@@ -14535,25 +14613,27 @@
                     e.target.reset();
                     CloseModal('addEventModalID');
                     ld.All.events.push(data);
-                    localStorage.setItem("prTwoAllData", JSON.stringify(ld.All));
-                    document.getElementById('eventCardsID').appendChild(EventCard(data));
+                    if (document.getElementById(`noEvent${data.type}ID`)) { document.getElementById(`noEvent${data.type}ID`).remove(); }
+                    document.getElementById(`event${data.type}CardID`).children[2].children[1].prepend(EventList(data));
                 })
                 .catch(function(error) {})
                 .then(function(res) { Loading(false); });
             ld.EventManagers = [];
         }
 
-        // get events// variables and constants
-        function GetEvents() {
-            Loading(true);
-            return fetch("/fetch/events", { method: 'get', credentials: 'include', headers: { "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" } }).then(data => data.json())
-                .then(data => {
-                    ld.All.events = data;
-                    localStorage.setItem("prTwoAllData", JSON.stringify(ld.All));
-                })
-                .catch(function(error) {})
-                .then(function(res) { Loading(false); });
+        // update user conf
+        function UpdateUserConf(e) {
+            e.preventDefault();
+            document.documentElement.style.setProperty('--primary', ld.AvailTeams[e.target.value].col);
+            document.getElementById('favClubID').innerHTML = ld.AvailTeams[e.target.value].name;
+            ld.User.conf.fc = e.target.value;
+            localStorage.setItem("prTwoUserData", JSON.stringify(ld.User));
+            CloseModal('changeConfModalID');
+            fetch("/update/user", { method: 'post', credentials: 'include', headers: { "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" }, body: `{"conf" : "{\\"fc\\":${e.target.value}}"}` }).then(data => data.json())
+                .then(data => {})
+                .catch(function(error) {});
         }
+
 
         // event index by id
         function FindEventById(id) {
@@ -14566,69 +14646,6 @@
         }
 
 
-        // event card
-        function EventCard(event) {
-            let date = new Date(event.created_at);
-            let card = document.createElement('div');
-            card.className = 'col-md-6 col-xs-12 p-3';
-            card.style = 'cursor: pointer';
-            card.onclick = function(e) {
-                e.preventDefault();
-                window.location.hash = `/event/${event.id}`;
-            }
-            card.innerHTML = `<div class="card"><div class="card-body"><center><i class="${ld.AvailEvents[event.type].icon} fa-3x text-primary"></i><h4 class="mt-3">${ld.AvailEvents[event.type].name}</h4>
-            <i class="far fa-calendar-alt text-primary"></i> ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}<br>
-            <i class="fas fa-angle-down fa-2x mt-2" style="cursor: pointer; color: #888;" onclick="javascript: event.stopPropagation(); this.nextElementSibling.classList.toggle('d-none'); if(this.classList.contains('fa-angle-down')) {this.className='fas fa-angle-up fa-2x mt-2';}else {this.className='fas fa-angle-down fa-2x mt-2';}"></i>
-            <div class="d-none row"><div class="col-6"><h2 class="text-primary">${event.managers.length}</h2><font class="text-muted">Teams</font></div><div class="col-6"><h2 class="text-primary">${event.fixtures.length}</h2><font class="text-muted">Fixtures</font></div><div class="col-12 mt-2 text-primary">${event.result}</div></div></center></div></div>`;
-            return card;
-        }
-
-        //reload events
-        function ReloadEvents() {
-            GetEvents().then(function() {
-                RenderEvents();
-            });
-        }
-
-        //get single event
-        function GetEvent() {
-            Loading(true);
-            return fetch("/event?eid=" + ld.Params[2], { method: 'get', credentials: 'include', headers: { "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" } }).then(data => data.json())
-                .then(data => {
-                    ld.All.events.push(data);
-                    ld.SelectedEvent = 0;
-                })
-                .catch(function(error) {})
-                .then(function(res) { Loading(false); });
-        }
-
-        //render events
-        function RenderEvents() {
-            let page = document.getElementById('pageViewID');
-            let cont = document.createElement('div');
-            cont.className = 'col-xs-12 col-md-8 col-lg-8';
-            cont.innerHTML = `<h2><i class="far fa-calendar text-primary"></i> <font class="text-primary">Your</font> Events </h2>
-                    <font class="text-muted">Showing Football Events </font>
-                    <br>
-                    <br>
-                    <a class="card-link admin-control" onclick="javascript: prepAddEventForm();"><i class="fas fa-plus-circle  text-primary"></i> Add New</a>
-                    <a class="card-link" onclick="reloadEvents()"><i class="fas fa-sync-alt text-primary"></i> Refresh</a>
-                    <hr>`;
-            cont.appendChild(EventCards());
-            page.replaceChild(cont, page.children[1]);
-        }
-
-        // render event cards
-        function EventCards() {
-            let cont = document.createElement('div');
-            cont.id = 'eventCardsID';
-            cont.className = 'row';
-            for (let i = 0; i < ld.All.events.length; i++) {
-                cont.appendChild(EventCard(ld.All.events[i]));
-            }
-            return cont;
-        }
-
         // find user by email
         function FindUserByEmail(email) {
             for (let i = 0; i < ld.All.users.length; i++) {
@@ -14640,7 +14657,7 @@
         }
 
         // prepare add event form
-        function PrepAddEventForm() {
+        function PrepAddEventForm(type) {
             let form = document.querySelector(`form[name="addEventForm"]`);
             ld.EventManagers = [];
             if (form.emanager.children.length == 0 || form.eteam.children.length == 0) {
@@ -14655,6 +14672,7 @@
                 form.emanager.innerHTML = managers;
                 form.eteam.innerHTML = teams;
             }
+            form.etype.value = type;
             form.children[1].children[0].children[0].innerHTML = '';
             ShowModal('addEventModalID');
         }
@@ -14695,61 +14713,71 @@
         // event header
         function EventHeader(event) {
             let header = document.createElement('div');
+            header.className = 'col-xs-12 col-md-6 col-lg-6';
             let date = new Date(event.created_at);
             if (VerifyEventAccess(event) == false) {}
-            header.innerHTML = `<center><i class="${ld.AvailEvents[event.type].icon} fa-3x text-primary"></i><h2>${ld.AvailEvents[event.type].name}</h2>
+            header.innerHTML = `<div class="mb-4 card pt-4"><center><i class="${ld.AvailEvents[event.type].icon} fa-3x text-primary"></i><h2>${ld.AvailEvents[event.type].name}</h2>
         <i class="far fa-calendar-alt text-primary"></i> ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}</center>
-        <div class="mt-3 mb-4 card"><div class="card-body"><h5>Status</h5><font class="text-primary">${event.result}</font></div></div>
-        <a class="card-link" href="/#/"><i class="fas fa-bars  text-primary"></i> View All</a>
-        <a class="card-link admin-control" onclick="prepAddFixtureForm()"><i class="fas fa-plus-circle  text-primary"></i> Add Fixture</a><hr>`;
+        <div class="list-group-item list-group-item-action mt-4"><h5><i class="far fa-comment text-primary"></i> Status</h5><font class="text-primary">${event.result}</font><br></div></div>`;
             return header;
         }
 
         //event fixture card
         function FixtureCard(fixture) {
-            let cont = document.createElement('div');
-            cont.innerHTML = `<div class="card mb-2"><div class="card-body text-center"><font class="text-muted">${ld.MatchTypes[fixture.ft].n}</font><br><div class="row"><div class="col-xs-12 col-md-4 col-lg-4">${ld.AvailTeams[fixture.ht].name}</div><div class="col-xs-12 col-md-4 col-lg-4"> <font class="text-primary ml-2 mr-2">${fixture.hg} <font class="text-muted">vs</font> ${fixture.ag}</font></div><div class="col-xs-12 col-md-4 col-lg-4">  ${ld.AvailTeams[fixture.at].name}</div></div></div></div>`;
-            return cont;
+            let eventCard = document.createElement('div');
+            eventCard.className = "list-group-item list-group-item-action text-center";
+            eventCard.innerHTML = `<font class="text-muted">${ld.MatchTypes[fixture.ft].n}</font><br><div class="row"><div class="col-xs-12 col-md-4 col-lg-4">${ld.AvailTeams[fixture.ht].name}</div><div class="col-xs-12 col-md-4 col-lg-4"> <font class="text-primary ml-2 mr-2">${fixture.hg} <font class="text-muted">vs</font> ${fixture.ag}</font></div><div class="col-xs-12 col-md-4 col-lg-4">  ${ld.AvailTeams[fixture.at].name}</div></div>`;
+            return eventCard;
         }
 
         // event fixture
         function EventFixtures(event) {
-            let cont = document.createElement('div');
-            cont.className = 'col-xs-12 col-md-7 col-lg-7';
-            cont.id = 'eventFixturesID';
-            for (let i = 0; i < event.fixtures.length; i++) {
-                cont.appendChild(FixtureCard(event.fixtures[i]));
+            let eventCont = document.createElement('div');
+            eventCont.className = 'col-xs-12 col-md-6 col-lg-6';
+            eventCont.id = 'eventFixturesID';
+            let fixCard = document.createElement('div');
+            fixCard.className = 'card mb-3';
+            fixCard.innerHTML = `<div class="card-header text-center"> Fixtures</div><button class="btn btn-secondary btn-block" onclick="prepAddFixtureForm()">ADD NEW</button>`;
+            let fixGroup = document.createElement('div');
+            fixGroup.className = 'list-group';
+            let len = event.fixtures.length - 1;
+            for (let i = len; i >= 0; i--) {
+                fixGroup.appendChild(FixtureCard(event.fixtures[i]));
             }
-            return cont;
+            if (len == -1) {
+                fixGroup.innerHTML = `<div class="list-group-item list-group-item-action text-center">No Fixture<br><font class="text-muted">No Fixture Played</font></div>`;
+            }
+            fixCard.appendChild(fixGroup);
+            eventCont.appendChild(fixCard);
+            return eventCont;
         }
 
         // event info
         function EventInfo(event) {
-            let cont = document.createElement('div');
+            let infoCont = document.createElement('div');
             let teams = '';
             for (let i = 0; i < event.managers.length; i++) {
                 let user = FindUserByEmail(event.managers[i].m)[0];
-                teams = teams + `<p>${ld.AvailTeams[event.managers[i].t].name}<br><font class="text-muted">${user.name}</font></p>`;
+                let form = (user.form / 30) * 100;
+                teams = teams + `<div class="progress"><div class="progress-bar" role="progressbar" style="width: ${form}%" aria-valuenow="${form}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div><div class="list-group-item list-group-item-action">${ld.AvailTeams[event.managers[i].t].name}<br><font class="text-muted">${user.name}</font><br></div>`;
             }
-            cont.className = 'col-xs-12 col-md-5 col-lg-5';
-            cont.id = "eventInfoID";
-            cont.innerHTML = `<div class="card mb-3"><div class="card-body"><h5>Teams</h5>${teams}</div></div>`;
-            return cont;
+            infoCont.className = 'card mb-3';
+            infoCont.id = "eventInfoID";
+            infoCont.innerHTML = `<div class="card-header text-center"> Teams</div>${teams}`;
+            return infoCont;
         }
 
         //render event
         function RenderEvent() {
             let page = document.getElementById('pageViewID');
             let cont = document.createElement('div');
-            cont.className = 'col-xs-12 col-md-8 col-lg-8';
-            cont.appendChild(EventHeader(ld.All.events[ld.SelectedEvent]));
-            let section = document.createElement('div');
-            section.className = 'row';
-            section.id = "eventDetailsID";
-            section.appendChild(EventInfo(ld.All.events[ld.SelectedEvent]));
-            section.appendChild(EventFixtures(ld.All.events[ld.SelectedEvent]));
-            cont.appendChild(section);
-            page.replaceChild(cont, page.children[1]);
+            cont.className = 'col-xs-12 col-lg-12 col-md-12 row';
+            let header = EventHeader(ld.All.events[ld.SelectedEvent]);
+            header.appendChild(EventInfo(ld.All.events[ld.SelectedEvent]));
+            cont.appendChild(header);
+            cont.appendChild(EventFixtures(ld.All.events[ld.SelectedEvent]));
+            page.replaceChild(cont, page.children[0]);
         }
 
         //prepare add fixture form
@@ -14809,11 +14837,8 @@
             fetch("/add/fixture?eid=" + ld.All.events[ld.SelectedEvent].id + "&result=" + ld.All.events[ld.SelectedEvent].result, { method: 'post', credentials: 'include', headers: { "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" }, body: `{ "ht": ${e.target.hometeam.value}, "hg": ${e.target.hometeamgs.value}, "at": ${e.target.awayteam.value}, "ag": ${e.target.awayteamgs.value}, "ft": ${e.target.fixturetype.value}, "dt": "${date.getDate()}/${date.getMonth()}/${date.getFullYear()}"  }`, }).then(data => data.json())
                 .then(data => {
                     e.target.reset();
-                    RenderEvent();
                     UpdateUserForm(result, ld.All.events[ld.SelectedEvent]);
-                    localStorage.setItem("prTwoAllData", JSON.stringify(ld.All));
-                    localStorage.setItem("prTwoUserData", JSON.stringify(ld.User));
-                    RenderUsers();
+                    RenderEvent();
                     CloseModal('addFixtureModalID');
                 })
                 .catch(function(error) {})
@@ -14827,20 +14852,10 @@
                     if (ld.All.users[FindUserByEmail(event.managers[i].m)[1]].form != 30) {
                         ld.All.users[FindUserByEmail(event.managers[i].m)[1]].form += 3;
                     }
-                    if (ld.User.email == event.managers[i].m) {
-                        if (ld.User.form != 30) {
-                            ld.User.form += 3;
-                        }
-                    }
                 }
                 if (event.managers[i].t == result[2]) {
                     if (ld.All.users[FindUserByEmail(event.managers[i].m)[1]].form != 0) {
                         ld.All.users[FindUserByEmail(event.managers[i].m)[1]].form -= 3;
-                    }
-                    if (ld.User.email == event.managers[i].m) {
-                        if (ld.User.form != 0) {
-                            ld.User.form -= 3;
-                        }
                     }
                 }
             }
@@ -14856,16 +14871,19 @@
         document.querySelector(`form[name="joinForm"]`).addEventListener('submit', UserJoin, false);
         document.querySelector(`form[name="addEventForm"]`).addEventListener('submit', AddEvent, false);
         document.querySelector(`form[name="addFixtureForm"]`).addEventListener('submit', AddFixture, false);
+        document.querySelector(`form[name="userConfForm"]`).uteam.addEventListener('change', UpdateUserConf, false);
 
         // function exposed to window
         window.showModal = ShowModal;
         window.prepAddEventForm = PrepAddEventForm;
         window.closeModal = CloseModal;
-        window.reloadEvents = ReloadEvents;
         window.addManagerTeam = AddManagerTeam;
         window.removeManagerTeam = RemoveManagerTeam;
         window.prepAddFixtureForm = PrepAddFixtureForm;
-
+        window.showManagers = ShowManagers;
+        window.showEvents = ShowEvents;
+        window.prepUserConf = PrepUserConf;
+        window.logOut = LogOut;
     }(window));
     </script>
 </body>
