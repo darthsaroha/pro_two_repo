@@ -14380,7 +14380,7 @@
         function IsLogged() {
             if (localStorage.getItem("prTwoUserData") != null && ld.User.email == undefined) {
                 ld.User = JSON.parse(localStorage.getItem("prTwoUserData"));
-                if(ld.User.conf == undefined) {
+                if (ld.User.conf == undefined) {
                     LogOut();
                     return;
                 }
@@ -14706,6 +14706,7 @@
 
         // verify event access
         function VerifyEventAccess(event) {
+            if (ld.User.email == undefined) { return false; }
             for (let i = 0; i < event.managers.length; i++) {
                 if (event.managers[i].m == ld.User.email) {
                     return true;
@@ -14741,7 +14742,10 @@
             eventCont.id = 'eventFixturesID';
             let fixCard = document.createElement('div');
             fixCard.className = 'card mb-3';
-            fixCard.innerHTML = `<div class="card-header text-center"> Fixtures</div><button class="btn btn-secondary btn-block" onclick="prepAddFixtureForm()">ADD NEW</button>`;
+            fixCard.innerHTML = `<div class="card-header text-center"> Fixtures</div>`;
+            if (VerifyEventAccess(event) == true) {
+                fixCard.innerHTML = fixCard.innerHTML + `<button class="btn btn-secondary btn-block" onclick="prepAddFixtureForm()">ADD NEW</button>`;
+            }
             let fixGroup = document.createElement('div');
             fixGroup.className = 'list-group';
             let len = event.fixtures.length - 1;
