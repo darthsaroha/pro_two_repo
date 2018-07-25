@@ -14509,7 +14509,7 @@
             if (e.target.classList.contains('fa-angle-down')) {
                 for (let i = 0; i < ld.All.users.length; i++) {
                     if (ld.All.users[i].email == ld.User.email) { continue; }
-                    let form = (ld.All.users[i].form / 30) * 100;
+                    let form = ((ld.All.users[i].form+3) / 33) * 100;
                     html = html + `<a href="#" class="list-group-item list-group-item-action"><div class="media"><i class="mr-3 far fa-user fa-3x text-primary"></i><div class="media-body">${ld.All.users[i].name}<br>
                    <font class="text-muted">${ld.All.users[i].email}</font><div class="progress"><div class="progress-bar" role="progressbar" style="width: ${form}%" aria-valuenow="${form}" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>${FindActiveUser(ld.All.users[i].email)}</div></div></a>`;
@@ -14766,7 +14766,7 @@
             let teams = '';
             for (let i = 0; i < event.managers.length; i++) {
                 let user = FindUserByEmail(event.managers[i].m)[0];
-                let form = (user.form / 30) * 100;
+                let form = ((user.form + 3) / 33) * 100;
                 teams = teams + `<div class="progress"><div class="progress-bar" role="progressbar" style="width: ${form}%" aria-valuenow="${form}" aria-valuemin="0" aria-valuemax="100"></div>
                     </div><div class="list-group-item list-group-item-action">${ld.AvailTeams[event.managers[i].t].name}<br><font class="text-muted">${user.name}</font><br></div>`;
             }
