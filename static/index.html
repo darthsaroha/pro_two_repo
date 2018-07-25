@@ -14120,7 +14120,7 @@
         </div>
     </nav>
     <div class="container">
-        <div class="row" id="pageViewID">
+        <div id="pageViewID">
             <div class="col-xs-12 col-md-12 col-lg-12">
             </div>
         </div>
@@ -14424,7 +14424,7 @@
         function RenderMenu() {
             let page = document.getElementById('pageViewID');
             let menu = document.createElement('div');
-            menu.className = 'col-xs-12 col-md-12 col-lg-12';
+            menu.className = 'row';
             let usercard = `<div class="card-body">
      <button class="btn btn-primary btn-block" onclick="showModal('loginJoinModalID')">MANAGER LOGIN</button>
      </div>`;
@@ -14437,8 +14437,7 @@
             <i class="fas fa-power-off text-primary"  style="cursor: pointer;" onclick="logOut()"></i>
         </div>`;
             }
-            menu.innerHTML = `<div class="row">
-<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            menu.innerHTML = `<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
     <div class="card mb-3 text-center" id="userCardID">
     ${usercard}
     </div>
@@ -14486,7 +14485,6 @@
             <i class="fas fa-angle-down fa-2x text-primary" onclick="showManagers(event)" style="cursor: pointer;"></i>
         </div>
     </div>
-</div>
 </div>`;
             page.replaceChild(menu, page.children[0]);
         }
@@ -14780,7 +14778,7 @@
         function RenderEvent() {
             let page = document.getElementById('pageViewID');
             let cont = document.createElement('div');
-            cont.className = 'col-xs-12 col-lg-12 col-md-12 row';
+            cont.className = 'row';
             let header = EventHeader(ld.All.events[ld.SelectedEvent]);
             header.appendChild(EventInfo(ld.All.events[ld.SelectedEvent]));
             cont.appendChild(header);
