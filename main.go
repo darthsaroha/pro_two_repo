@@ -203,6 +203,7 @@ func main() {
 			http.Error(res, "INVREQ", 500)
 			return
 		}
+		u.Conf = "{\"fc\":0}"
 		u.Auth[0] = u.Auth[0][2:4] + u.Auth[0][5:7] + u.Auth[0][8:10] + u.Auth[0][17:19] + u.Auth[0][20:22]
 		stm, _ := db.Prepare("INSERT INTO pr_two_users (uid,uemail , uname ,uconf, upassword_digest , ucreated_at , uupdated_at) VALUES (? ,?, ?, ?,?,?);")
 		defer stm.Close()
