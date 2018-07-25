@@ -14380,6 +14380,10 @@
         function IsLogged() {
             if (localStorage.getItem("prTwoUserData") != null && ld.User.email == undefined) {
                 ld.User = JSON.parse(localStorage.getItem("prTwoUserData"));
+                if(ld.User.conf == undefined) {
+                    LogOut();
+                    return;
+                }
                 document.cookie = `Auth0=${ld.User.auth[0]}`;
                 document.cookie = `Auth1=${ld.User.auth[1]}`;
                 document.cookie = `Auth2=${ld.User.auth[2]}`;
