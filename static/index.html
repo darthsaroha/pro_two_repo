@@ -37,7 +37,6 @@
         --fontcolor: #fff;
         --progbg: #444;
         --cardshd: none;
-        /*        --cardshd: 0 0.46875rem 2.1875rem rgba(90, 97, 105, 0.1), 0 0.9375rem 1.40625rem rgba(90, 97, 105, 0.1), 0 0.25rem 0.53125rem rgba(90, 97, 105, 0.12), 0 0.125rem 0.1875rem rgba(90, 97, 105, 0.1);*/
         --indigo: #6610f2;
         --purple: #6f42c1;
         --pink: #e83e8c;
@@ -3967,11 +3966,12 @@
         height: calc(2.25rem + 2px);
         padding: 0.375rem 1.75rem 0.375rem 0.75rem;
         line-height: 1.5;
-        color: #495057;
+        color: #fff;
         vertical-align: middle;
-        background: #fff url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right 0.75rem center;
+        background: var(--progbg) url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right 0.75rem center;
         background-size: 8px 10px;
-        border: 1px solid #ced4da;
+        border: 1px solid var(--progbg);
+        background-color: var(--progbg);
         border-radius: 0.25rem;
         -webkit-appearance: none;
         -moz-appearance: none;
@@ -3979,14 +3979,14 @@
     }
 
     .custom-select:focus {
-        border-color: #80bdff;
+        border-color: var(--progbg);
         outline: 0;
-        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075), 0 0 5px rgba(128, 189, 255, 0.5);
     }
 
     .custom-select:focus::-ms-value {
-        color: #495057;
-        background-color: #fff;
+        color: #fff;
+        background-color: var(--progbg);
+        outline: 0;
     }
 
     .custom-select[multiple],
@@ -5479,6 +5479,7 @@
     .list-group-item:focus {
         z-index: 1;
         text-decoration: none;
+        outline: 0;
     }
 
     .list-group-item.disabled,
@@ -5733,8 +5734,14 @@
         width: 100%;
         pointer-events: auto;
         background-color: var(--cardbg);
+        background: rgb(34, 34, 34);
+        /* Fallback for older browsers without RGBA-support */
+        background: rgba(34, 34, 34, 0.9);
         background-clip: padding-box;
-        border-radius: 0.3rem;
+        border-radius: 0;
+        -webkit-box-shadow: 0px -1px 5px 0px rgba(68, 68, 68, 1);
+        -moz-box-shadow: 0px -1px 5px 0px rgba(68, 68, 68, 1);
+        box-shadow: 0px -1px 5px 0px rgba(68, 68, 68, 1);
         outline: 0;
     }
 
@@ -14110,6 +14117,46 @@
         height: 450px;
         overflow-y: auto;
     }
+
+    .custom-toggle {
+        position: relative;
+        padding-left: 3.75rem
+    }
+
+    .custom-toggle .custom-control-label::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 3.125rem;
+        height: 1.75rem;
+        background: #fff;
+        border-radius: 100px;
+    }
+
+    .custom-toggle .custom-control-label::after {
+        content: '';
+        position: absolute;
+        top: .25rem;
+        left: .25rem;
+        width: 1.25rem;
+        height: 1.25rem;
+        background: var(--primary);
+        border-radius: 6.25rem;
+        transition: 350ms;
+    }
+
+    .custom-toggle .custom-control-input:checked~.custom-control-label::before {
+        background: var(--primary);
+        border-color: none;
+    }
+
+    .custom-toggle .custom-control-input:checked~.custom-control-label::after {
+        left: 2.875rem;
+        -webkit-transform: translateX(-100%);
+        transform: translateX(-100%);
+        background: #fff;
+    }
     </style>
 </head>
 
@@ -14186,50 +14233,50 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form name="addEventForm">
-                        <input type="hidden" name="etype" value="0">
-                        <div class="form-group card">
-                            <div class="card-body">
+                    <div class="col-xs-12 col-md-12 col-lg-12">
+                        <form name="addEventForm">
+                            <input type="hidden" name="etype" value="0">
+                            <div class="form-group">
                                 <span class="mb-3"></span>
                                 <label class="text-muted">Manager</label>
-                                <select class="form-control" name="emanager">
+                                <select class="custom-select" name="emanager">
                                 </select>
                                 <label class="text-muted mt-2">Team</label>
-                                <select class="form-control" name="eteam">
+                                <select class="custom-select" name="eteam">
                                 </select>
                                 <br>
-                                <a onclick="addManagerTeam()">Add Team</a>
+                                <br>
+                                <a onclick="addManagerTeam()"><i class="fas fa-plus"></i> Add Team</a>
                             </div>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" id="customToggle2" name="public" class="form-check-input" value="1" checked="true">
-                            <label>Public?</label>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary" name="submit"><i class="fas fa-plus"></i> <b> Add</b></button>
-                        </div>
-                    </form>
+                            <div class="form-group">
+                                <label class="text-muted">Access</label>
+                                <select class="custom-select" name="public">
+                                    <option value="1">Public</option>
+                                    <option value="0">Private</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary" name="submit"><i class="fas fa-plus"></i> <b> Add</b></button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="modal" id="changeConfModalID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content" style="height: 180px !important;">
-                <div class="modal-header">
-                    <button type="button" style="outline: 0;" class="close" onclick="closeModal('changeConfModalID')">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
+            <div class="modal-content" style="height: 140px !important; border-radius: 1rem;">
                 <div class="modal-body">
                     <form name="userConfForm">
-                        <label>Change Your Favourite Club</label>
+                        <label class="text-muted">Change Your Favourite Club</label>
                         <input type="hidden" name="etype" value="0">
                         <div class="form-group">
-                            <select class="form-control" name="uteam">
+                            <select class="custom-select" name="uteam">
                             </select>
                         </div>
                     </form>
+                    <a onclick="closeModal('changeConfModalID')"><i class="fas fa-times"></i> Close</a>
                 </div>
             </div>
         </div>
@@ -14244,32 +14291,34 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form name="addFixtureForm">
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">Select Home Team</label>
-                            <select class="form-control" name="hometeam">
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <input type="number" name="hometeamgs" value="0" class="form-control" placeholder="Home Team Goals">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">Select Away Team</label>
-                            <select class="form-control" name="awayteam">
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <input type="int" name="awayteamgs" value="0" class="form-control" placeholder="Away Team Goals">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">Fixture Type</label>
-                            <select class="form-control" name="fixturetype">
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary" name="submit"><i class="fas fa-plus"></i> <b> Add</b></button>
-                        </div>
-                    </form>
+                    <div class="col-xs-12 col-md-12 col-lg-12">
+                        <form name="addFixtureForm">
+                            <div class="form-group">
+                                <label class="text-muted">Select Home Team</label>
+                                <select class="custom-select" name="hometeam">
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="number" name="hometeamgs" value="0" class="form-control" placeholder="Home Team Goals">
+                            </div>
+                            <div class="form-group">
+                                <label class="text-muted">Select Away Team</label>
+                                <select class="custom-select" name="awayteam">
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="int" name="awayteamgs" value="0" class="form-control" placeholder="Away Team Goals">
+                            </div>
+                            <div class="form-group">
+                                <label class="text-muted">Fixture Type</label>
+                                <select class="custom-select" name="fixturetype">
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary" name="submit"><i class="fas fa-plus"></i> <b> Add</b></button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -14485,6 +14534,10 @@
             <i class="fas fa-angle-down fa-2x text-primary" onclick="showManagers(event)" style="cursor: pointer;"></i>
         </div>
     </div>
+                <div class="card mb-3 text-center pt-3">
+        <h4>About</h4>
+        <div class="list-group-item list-group-item-action text-center text-muted">Version - 1<br><small>Recent Commit - Love Saroha</small></div>
+        </div>
 </div>`;
             page.replaceChild(menu, page.children[0]);
         }
@@ -14507,7 +14560,7 @@
             if (e.target.classList.contains('fa-angle-down')) {
                 for (let i = 0; i < ld.All.users.length; i++) {
                     if (ld.All.users[i].email == ld.User.email) { continue; }
-                    let form = ((ld.All.users[i].form+3) / 33) * 100;
+                    let form = ((ld.All.users[i].form + 3) / 33) * 100;
                     html = html + `<a href="#" class="list-group-item list-group-item-action"><div class="media"><i class="mr-3 far fa-user fa-3x text-primary"></i><div class="media-body">${ld.All.users[i].name}<br>
                    <font class="text-muted">${ld.All.users[i].email}</font><div class="progress"><div class="progress-bar" role="progressbar" style="width: ${form}%" aria-valuenow="${form}" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>${FindActiveUser(ld.All.users[i].email)}</div></div></a>`;
@@ -14675,7 +14728,7 @@
                 form.eteam.innerHTML = teams;
             }
             form.etype.value = type;
-            form.children[1].children[0].children[0].innerHTML = '';
+            form.children[1].children[0].innerHTML = '';
             ShowModal('addEventModalID');
         }
 
@@ -14687,8 +14740,8 @@
             }
             ld.EventManagers.push({ m: form.emanager.value, t: form.eteam.value });
             let team = document.createElement('div');
-            team.innerHTML = `<p id="${form.emanager.value}${form.eteam.value}">${ld.AvailTeams[form.eteam.value].name}<br><small class="text-muted">${form.emanager.value}</small><br><a onclick="javascript: removeManagerTeam(this);">Remove</a></p>`;
-            form.children[1].children[0].children[0].prepend(team);
+            team.innerHTML = `<p id="${form.emanager.value}${form.eteam.value}">${ld.AvailTeams[form.eteam.value].name}<br><small class="text-muted">${form.emanager.value}</small><br><a onclick="javascript: removeManagerTeam(this);"><i class="fas fa-times"></i> Remove</a></p>`;
+            form.children[1].children[0].prepend(team);
         }
 
         // remove manager team
@@ -14765,8 +14818,8 @@
             for (let i = 0; i < event.managers.length; i++) {
                 let user = FindUserByEmail(event.managers[i].m)[0];
                 let form = ((user.form + 3) / 33) * 100;
-                teams = teams + `<div class="progress"><div class="progress-bar" role="progressbar" style="width: ${form}%" aria-valuenow="${form}" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div><div class="list-group-item list-group-item-action">${ld.AvailTeams[event.managers[i].t].name}<br><font class="text-muted">${user.name}</font><br></div>`;
+                teams = teams + `<div class="list-group-item list-group-item-action" style="margin-bottom: 0px;">${ld.AvailTeams[event.managers[i].t].name}<br><font class="text-muted">${user.name}</font></div><div class="progress"><div class="progress-bar" role="progressbar" style="width: ${form}%" aria-valuenow="${form}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>`;
             }
             infoCont.className = 'card mb-3';
             infoCont.id = "eventInfoID";
